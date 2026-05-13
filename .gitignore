@@ -1,0 +1,19 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/test.db
+
+# Env
+backend/.env
+frontend/.env
+
+# React
+frontend/node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.pyc
