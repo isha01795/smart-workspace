@@ -1,12 +1,28 @@
-from pydantic import BaseModel, ConfigDict
-from typing import Optional
+from pydantic import BaseModel
+from datetime import date
 
 
 class TaskCreate(BaseModel):
 
     title: str
+    description: str | None = None
+
+    priority: str = "Medium"
+
+    due_date: date | None = None
+
+
+class TaskUpdate(BaseModel):
+
+    title: str | None = None
 
     description: str | None = None
+
+    completed: bool | None = None
+
+    priority: str | None = None
+
+    due_date: date | None = None
 
 
 class TaskResponse(BaseModel):
@@ -19,16 +35,12 @@ class TaskResponse(BaseModel):
 
     completed: bool
 
+    priority: str
+
+    due_date: date | None
+
     project_id: int
 
-    model_config = ConfigDict(
-        from_attributes=True
-    )
+    class Config:
 
-class TaskUpdate(BaseModel):
-
-    title: Optional[str] = None
-
-    description: Optional[str] = None
-
-    completed: Optional[bool] = None    
+        from_attributes = True

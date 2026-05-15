@@ -3,7 +3,8 @@ from sqlalchemy import (
     Integer,
     String,
     Boolean,
-    ForeignKey
+    ForeignKey,
+    Date
 )
 
 from sqlalchemy.orm import relationship
@@ -33,6 +34,16 @@ class Task(Base):
         default=False
     )
 
+    priority = Column(
+        String,
+        default="Medium"
+    )
+
+    due_date = Column(
+        Date,
+        nullable=True
+    )
+
     project_id = Column(
         Integer,
         ForeignKey(
@@ -42,6 +53,6 @@ class Task(Base):
     )
 
     project = relationship(
-    "Project",
-    back_populates="tasks"
-)
+        "Project",
+        back_populates="tasks"
+    )

@@ -67,10 +67,10 @@ async def get_projects(
     )
 ):
 
-    return ProjectService.get_user_projects(
-        db=db,
-        owner_id=current_user.id
-    )
+    return await ProjectService.get_projects(
+    db=db,
+    owner_id=current_user.id
+)
 
 
 @router.patch(

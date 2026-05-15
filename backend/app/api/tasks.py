@@ -15,16 +15,17 @@ from app.core.dependencies import (
 )
 
 from app.models.user import User
-from app.models.project import Project
 
 from app.schemas.task import (
     TaskCreate,
     TaskResponse,
     TaskUpdate
 )
+
 from app.services.task_service import (
     TaskService
 )
+
 from app.core.exceptions import (
     ProjectNotFoundException
 )
@@ -69,11 +70,14 @@ async def create_task(
             db=db,
             title=task.title,
             description=task.description,
-            project_id=project.id
+            project_id=project.id,
+            priority=task.priority,
+            due_date=task.due_date
         )
     )
 
     return new_task
+
 
 @router.get(
     "/{project_id}",
@@ -111,6 +115,7 @@ async def get_tasks(
     )
 
     return tasks
+
 
 @router.patch(
     "/update/{task_id}",
@@ -160,6 +165,7 @@ async def update_task(
     await db.refresh(task)
 
     return task
+
 
 @router.delete("/{task_id}")
 async def delete_task(

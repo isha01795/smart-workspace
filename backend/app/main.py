@@ -1,6 +1,9 @@
 from fastapi import FastAPI, Depends
 
 from app.core.database import Base, engine
+from fastapi.middleware.cors import (
+    CORSMiddleware
+)
 
 from app.models.user import User
 from app.models.project import Project
@@ -22,6 +25,30 @@ from app.core.exceptions import (
 )
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+
+    allow_credentials=True,
+
+    allow_methods=["*"],
+
+    allow_headers=["*"],
+)
+
+@app.on_event("startup")
+async def startup():
+
+    async with engine.begin() as conn:
+
+        await conn.run_sync(
+            Base.metadata.create_all
+        )
+
 
 @app.exception_handler(
     ProjectNotFoundException

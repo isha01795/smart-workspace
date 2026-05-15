@@ -14,7 +14,9 @@ class TaskService:
         db: AsyncSession,
         title: str,
         description: str,
-        project_id: int
+        project_id: int,
+        priority,
+        due_date,
     ):
 
         return await (
@@ -22,7 +24,9 @@ class TaskService:
                 db=db,
                 title=title,
                 description=description,
-                project_id=project_id
+                project_id=project_id,
+                priority=priority,
+                due_date=due_date,
             )
         )
 
