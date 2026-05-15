@@ -3,12 +3,10 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker
 )
-
 from sqlalchemy.orm import declarative_base
-
 from app.core.config import settings
 
-
+# The engine now uses the live Neon URL when on Render
 engine = create_async_engine(
     settings.DATABASE_URL,
     echo=True
@@ -22,9 +20,9 @@ AsyncSessionLocal = async_sessionmaker(
 
 Base = declarative_base()
 
-
 async def get_db():
-
     async with AsyncSessionLocal() as session:
-
-        yield session
+        try:
+            yield session
+        finally:
+            await session.close()
