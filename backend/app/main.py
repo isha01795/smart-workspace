@@ -31,8 +31,8 @@ app.add_middleware(
 
     allow_origins=[
     "https://smart-workspace-cbv7zc4l9-isha-gupta-s-projects1.vercel.app",
-    "https://smart-workspace-rust.vercel.app/", # Add your main production link too!
-    "http://localhost:5173", # Keep this for local testing (or 3000 for CRA)
+    "https://smart-workspace-rust.vercel.app", 
+    "http://localhost:5173",
 ],
 
     allow_credentials=True,
